@@ -1,3 +1,5 @@
+'''Stack - Last In, First Out (LIFO)'''
+
 class Stack():
     def __init__(self):
         self._stack = []
@@ -9,8 +11,7 @@ class Stack():
     
     @stack.setter 
     def stack(self, value):
-        # raise error if attempting to set stack directly
-        # preserve integrity of internal data structure
+        # prevent modifying stack directly to maintain integrity of its operations.
         raise ValueError("Cannot set stack directly")
 
     def is_empty(self): #O(1)
