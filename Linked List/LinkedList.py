@@ -7,7 +7,8 @@ class SinglyLinkedList:
     def __init__(self):
         self.head = None
 
-    def prepend(self, value):
+    # Add at the beginning of linked list
+    def prepend(self, value): #O(1)
         new_node = Node(value)
         if self.head == None:
             self.head = new_node
@@ -17,7 +18,8 @@ class SinglyLinkedList:
             # Update the head to be the new node
             self.head = new_node
 
-    def append(self, value):
+    # Add at the end of linked list
+    def append(self, value): # O(n)
         new_node = Node(value)
         current_node = self.head
 
@@ -28,6 +30,10 @@ class SinglyLinkedList:
                 current_node = current_node.next
             current_node.next = new_node
     
+    # Add at a specific index 
+    def insert(self, value):
+        pass
+     
     def __str__(self):
         nodes = []
         current = self.head
