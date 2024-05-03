@@ -66,6 +66,36 @@ class SinglyLinkedList:
             prev_node = current_node
             current_node = current_node.next
         prev_node.next = None
+
+    def remove(self, value):
+        index = 0
+        current_node = self.head
+
+        # When the ll is empty or the value is the head
+        if current_node == None:
+            raise IndexError("Can't remove from empty linked list!")
+        elif current_node.data == value:
+            self.head = current_node.next
+            return "removed " + str(value) + " at index " + str(index)
+        
+        # When the value is between the head and tail
+        while current_node.next != None:
+            if current_node.data == value:
+                prev_node.next = current_node.next
+                return "removed " + str(value) + " at index " + str(index)
+            index+=1
+            prev_node = current_node
+            current_node = current_node.next
+
+        # When the value is the tail
+        if current_node.data == value:
+            prev_node.next = None
+            return "removed " + str(value) + " at index " + str(index)
+        
+        # When the value doesn't exist
+        return "value not found."
+    
+
      
     def __str__(self):
         nodes = []
@@ -99,3 +129,8 @@ except IndexError as e:
 ll.remove_tail()
 print(ll)
 
+print(ll.remove(666))
+print(ll)
+
+print(ll)
+print(ll)
