@@ -1,0 +1,74 @@
+# test_linkedlist.py
+import unittest
+from SinglyLinkedList import SinglyLinkedList
+
+class TestSinglyLinkedList(unittest.TestCase):
+
+    def test_prepend(self):
+        sll = SinglyLinkedList()
+        sll.prepend(10)
+        sll.prepend(20)
+        self.assertEqual(str(sll), '20 -> 10')
+
+    def test_append(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(20)
+        self.assertEqual(str(sll), '10 -> 20')
+
+    def test_insert(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(30)
+        sll.insert(20, 1)
+        self.assertEqual(str(sll), '10 -> 20 -> 30')
+        with self.assertRaises(IndexError):
+            sll.insert(40, 5)
+
+    def test_remove_head(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(20)
+        sll.remove_head()
+        self.assertEqual(str(sll), '20')
+        sll.remove_head()
+        self.assertEqual(str(sll), '')
+        with self.assertRaises(IndexError):
+            sll.remove_head()
+
+    def test_remove_tail(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(20)
+        sll.remove_tail()
+        self.assertEqual(str(sll), '10')
+        sll.remove_tail()
+        self.assertEqual(str(sll), '')
+        with self.assertRaises(IndexError):
+            sll.remove_tail()
+
+    def test_remove(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(20)
+        sll.append(30)
+        sll.remove(20)
+        self.assertEqual(str(sll), '10 -> 30')
+        self.assertEqual(sll.remove(100), "value not found.")
+
+    def test_search(self):
+        sll = SinglyLinkedList()
+        sll.append(10)
+        sll.append(20)
+        sll.append(30)
+        self.assertEqual(sll.search(20), 1)
+        self.assertEqual(sll.search(40), -1)
+
+    def test_is_empty(self):
+        sll = SinglyLinkedList()
+        self.assertTrue(sll.is_empty())
+        sll.append(10)
+        self.assertFalse(sll.is_empty())
+
+if __name__ == '__main__':
+    unittest.main()

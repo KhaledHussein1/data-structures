@@ -6,13 +6,10 @@ class Node:
 class SinglyLinkedList:
     def __init__(self):
         self.head = None # Keep track of the head - empty on intialization
-
-    def is_empty(self):
-        current_node = self.head
-        if current_node == None:
-            return True
-        return False
-        
+    
+    '''
+    Inserting Operations
+    '''
     # Add at the beginning of linked list - O(1)
     def prepend(self, value): 
         new_node = Node(value)
@@ -39,25 +36,28 @@ class SinglyLinkedList:
     # Add at a specific index - O(n)
     def insert(self, value, index):
         new_node = Node(value)
-        i = 0
-
         if index == 0:
             new_node.next = self.head
             self.head = new_node
             return
         
-        current_node = self.head
-        while current_node != None:
-            prev_node = current_node
-            current_node = current_node.next
-            if i == index:
-                prev_node.next = new_node
-                new_node.next = current_node.next
-                return
-            elif i <= index:
-                i+=1
-        return
+        prev_node = self.head
+        current_index = 0
+
+        while prev_node.next is not None and current_index < index - 1:
+            prev_node = prev_node.next
+            current_index += 1
+
+        if prev_node is None or current_index != index - 1:
+            raise IndexError("Index out of bounds")
+
+        new_node.next = prev_node.next
+        prev_node.next = new_node 
+        
     
+    '''
+    Deleting Operations
+    '''
     def remove_head(self): # O(1)
         current_node = self.head
         if current_node == None:
@@ -65,43 +65,45 @@ class SinglyLinkedList:
         self.head = current_node.next
 
     def remove_tail(self): # O(n)
-        current_node = self.head
-        prev_node = None
-        if self.is_empty():
+        if self.is_empty():  
             raise IndexError("List is empty.")
-        while current_node.next != None:
+    
+        current_node = self.head
+        if current_node.next is None: # If there's only one node, remove it
+            self.head = None
+            return
+        
+        # Traverse the list until the second to last node
+        prev_node = None
+        while current_node.next is not None:
             prev_node = current_node
             current_node = current_node.next
+        
+        # Remove the last node
         prev_node.next = None
 
     def remove(self, value):
-        index = 0
-        current_node = self.head
-
-        # When the ll is empty or the value is the head
         if self.is_empty():
             raise IndexError("List is empty.")
-        elif current_node.data == value:
-            self.head = current_node.next
-            return "removed " + str(value) + " at index " + str(index)
         
-        # When the value is between the head and tail
-        while current_node.next != None:
+        current_node = self.head
+        prev_node = None
+        
+        while current_node is not None:
             if current_node.data == value:
-                prev_node.next = current_node.next
-                return "removed " + str(value) + " at index " + str(index)
-            index+=1
+                if prev_node is None:
+                    self.head = current_node.next # Removing head node
+                else:
+                    prev_node.next = current_node.next # removing middle or tail
+                return "Removed " + str(value)
             prev_node = current_node
             current_node = current_node.next
 
-        # When the value is the tail
-        if current_node.data == value:
-            prev_node.next = None
-            return "removed " + str(value) + " at index " + str(index)
-        
-        # When the value doesn't exist
         return "value not found."
     
+    '''
+    Search Operation
+    '''
     def search(self, value): # O(n)
         current_node = self.head
         index = 0
@@ -109,17 +111,23 @@ class SinglyLinkedList:
         if self.is_empty():
             raise IndexError("List is empty.")
         
-        while current_node.next != None:
+        while current_node is not None:
             if current_node.data == value:
                 return index
             index +=1
             current_node = current_node.next
         
-        # When the value is the tail
-        if current_node.data == value:
-            return index
-        return -1
-     
+        return -1 # If the value isn't found in any node
+    
+    '''
+    Helper Operation
+    '''
+    def is_empty(self):
+        current_node = self.head
+        if current_node == None:
+            return True
+        return False
+    
     def __str__(self):
         nodes = []
         current = self.head
@@ -128,19 +136,3 @@ class SinglyLinkedList:
             current = current.next
         return " -> ".join(nodes)
     
-# example usage
-ll = SinglyLinkedList()
-
-ll.append(2)
-ll.append(8)
-ll.append(99)
-ll.append(728)
-
-print(ll)
-
-try:
-    ll.insert(6696,1)
-except IndexError as e:
-    print(e)
-
-print(ll)
