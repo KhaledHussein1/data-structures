@@ -138,21 +138,23 @@ class DoublyLinkedList:
             current = current.next
         return " -> ".join(nodes)
     
-dll = DoublyLinkedList()
+
+if __name__ == "__main__":
+    dll = DoublyLinkedList()
 
 
-dll.prepend(12)
+    dll.prepend(12)
 
-dll.append(1)
-dll.append(3)
-dll.append(2)
-dll.append(6)
-dll.append(7)
-dll.append(9)
-dll.append(199)
-dll.remove(4)
-print(dll)
-
+    dll.append(1)
+    dll.append(3)
+    dll.append(2)
+    dll.append(6)
+    dll.append(7)
+    dll.append(9)
+    dll.append(199)
+    dll.remove(4)
+    print(dll)
+    
 
 
 
