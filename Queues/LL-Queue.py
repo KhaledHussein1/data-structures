@@ -1,6 +1,7 @@
 import sys
-sys.path.append('C:/Users/Masch/Desktop/Data Structures')  # Adjust path as necessary
+#sys.path.append('')  
 from LinkedList.double.DoublyLinkedList import DoublyLinkedList as DLL
+
 class Queue:
     def __init__(self):
         self.dll = DLL()
