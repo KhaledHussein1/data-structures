@@ -6,13 +6,13 @@ class Queue:
     def __init__(self):
         self.dll = DLL()
 
-    def pop(self):
+    def enqueue(self): # O(1)
         self.dll.remove_head()
 
-    def push(self, value):
+    def dequeue(self, value): # O(1)
         self.dll.append(value)
 
-    def is_empty(self):
+    def is_empty(self): # O(1)
         return self.dll.is_empty()
     
     def __str__(self):
@@ -24,16 +24,3 @@ class Queue:
         return " <-- ".join(nodes)
     
 q = Queue()
-
-print(q.is_empty())
-q.push(1)
-q.push(2)
-q.push(3)
-q.push(4)
-q.push(5)
-q.push(6)
-
-print(q)
-q.pop()
-
-print(q)

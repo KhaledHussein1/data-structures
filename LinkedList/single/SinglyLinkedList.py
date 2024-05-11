@@ -82,7 +82,7 @@ class SinglyLinkedList:
         # Remove the last node
         prev_node.next = None
 
-    def remove(self, value):
+    def remove(self, value): # O(n)
         if self.is_empty():
             raise IndexError("List is empty.")
         

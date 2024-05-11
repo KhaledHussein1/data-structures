@@ -113,7 +113,7 @@ class DoublyLinkedList:
         return
 
     # Traversal
-    def search(self, value):
+    def search(self, value): # O(n)
         if self.is_empty():
             return False
         else:
