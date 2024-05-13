@@ -1,20 +1,26 @@
+class Node:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.next = None
+        
+
 class HashTable:
-    def __init__(self):
-        pass
+    def __init__(self, capacity):
+        self.size = 0
+        self.capacitiy = capacity
+        self.table = [None] * capacity
+
+    def hash(self, key):
+        return hash(key) % self.capacity
 
     def insert(self, value):
         pass
 
-    def get(self, value):
+    def search(self, value):
         pass
 
     def remove(self, value):
-        pass
-
-    def hash(self, value):
-        pass
-
-    def resize(self, value):
         pass
 
     def __str__(self):
